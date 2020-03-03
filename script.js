@@ -5,15 +5,12 @@ $(document).ready(function() {
   
     // commented out for test in non-standard hours
     let nowHour24 = moment().format('H');
-    let nowHour12 = moment().format('h');  
-   
+
     //Current Day Heading Display
     let $dateHeading = $('#currentDay');
     $dateHeading.text(now);
-    
-    // using font awesome icon https://fontawesome.com/license
-    // change description here - none
-    const saveIcon = "./images/save-regular.svg"; 
+  
+  
   
     // Get stored todos from localStorage
     // Parsing the JSON string to an object
@@ -26,8 +23,7 @@ $(document).ready(function() {
       // this should only occur on first time the app is loaded in the browser   
       planTextArr = new Array(9);
     }
-  
-     
+       
     // set variable referencing planner element
     let $plannerDiv = $('#plannerContainer');
     // clear existing elements
@@ -79,6 +75,7 @@ $(document).ready(function() {
       $dailyPlanSpn.attr('id',`input-${index}`);
       $dailyPlanSpn.attr('hour-index',index);
       $dailyPlanSpn.attr('type','text');
+      $dailyPlanSpn.attr('size','96px');
       $dailyPlanSpn.attr('class','dailyPlan');
   
       // access index from data array for hour 
@@ -97,10 +94,10 @@ $(document).ready(function() {
       let $col1SaveDiv = $('<div>');
       $col1SaveDiv.addClass('col-md-1');
   
-      let $saveBtn = $('<i>');
+      let $saveBtn = $('<button>Save</button>');
       $saveBtn.attr('id',`saveid-${index}`);
       $saveBtn.attr('save-id',index);
-      $saveBtn.attr('class',"far fa-save saveIcon");
+      $saveBtn.attr('class',"far fa-save");
       
       // add col width and row component to row
       $rowDiv.append($col1SaveDiv);
@@ -118,7 +115,7 @@ $(document).ready(function() {
     function updateRowColor ($hourRow,hour) {      
   
       if ( hour < nowHour24) {        
-        $hourRow.css("background-color","lightgrey")
+        $hourRow.css("background-color","LightSalmon")
       } else if ( hour > nowHour24) {        
         $hourRow.css("background-color","lightgreen")
       } else {        
@@ -128,7 +125,7 @@ $(document).ready(function() {
   
     // saves to local storage
     // conclick function to listen for user clicks on plan area
-    $(document).on('click','i', function(event) {
+    $(document).on('click','button', function(event) {
       event.preventDefault();        
   
       let $index = $(this).attr('save-id');
